@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import Empresas from "../components/sections/Empresas.astro";
+import { InfoApp } from "../components/sections/InfoApp";
+import Metricas from "../components/sections/Metricas.astro";
+import Precios from "../components/sections/precios.astro";
+import Preguntas from "../components/sections/Preguntas.astro";
+import FooterPage from "../components/sections/FooterPage.astro";
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layout>
+  <main class="flex items-center flex-col justify-center">
+    <Header />
+    <HeroSection />
+
+    <!-- Seccion con w limitado -->
+    <div class="w-[97%] 2xl:w-[65%]">
+      <Empresas />
+      <InfoApp client:load />
+      <Metricas />
+      <Precios />
+      <Preguntas />
+      <FooterPage />
+    </div>
+  </main>
+</Layout>

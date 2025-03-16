@@ -1,0 +1,84 @@
+---
+import { precios } from "../../consts/precios";
+---
+
+<section class="py-36 flex flex-col items-center" id="precios">
+  <div class="text-center text-animate">
+    <h1 class="text-4xl font-medium mb-4">Nuestros precios</h1>
+    <p class="text-gray-500 text-lg mb-18">
+      Descubre la flexibilidad y eficiencia de nuestros precios. <br /> Elige el
+      que más se ajusta a tus necesidades.
+    </p>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 w-[80%] data-anim">
+    {
+      precios.map((precio) => (
+        <div class="h-100 border p-6 flex flex-col justify-between border-gray-200 rounded-2xl shadow-lg">
+          <h3 class="text-2xl font-medium">{precio.title}</h3>
+          <div class="flex items-center gap-2">
+            <p class="text-4xl font-medium">${precio.precio}</p>
+            <p class="text-gray-500 text-sm">/mes</p>
+          </div>
+          <div>
+            <ul class="flex flex-col gap-2">
+              {precio.beneficios.map((beneficio) => (
+                <li class="flex items-center gap-2">
+                  <span class="bg-gray-100 h-6 w-6 flex justify-center items-center rounded-full text-gray-600">
+                    <i class="bx bx-check font-medium text-lg" />
+                  </span>
+                  <p class=" text-gray-600">{beneficio}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <button class="bg-primary text-white px-4 py-2 rounded-full cursor-pointer hover:bg-gray-800 duration-150">
+            <p>Comienza ahora</p>
+          </button>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .text-animate {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .text-animate.text-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .data-anim {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .data-anim.data-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  import { createObserverAnim } from "../../js/observerAnimation";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const textAnim = document.querySelectorAll(".text-animate");
+    const dataAnim = document.querySelectorAll(".data-anim");
+
+    if (textAnim) {
+      const animationText = createObserverAnim("text-visible");
+      textAnim.forEach((el) => animationText.observe(el));
+    }
+
+    if (dataAnim) {
+      const animationData = createObserverAnim("data-visible");
+      dataAnim.forEach((el) => animationData.observe(el));
+    }
+  });
+</script>

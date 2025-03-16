@@ -1,0 +1,138 @@
+---
+import MainButton from "../MainButton.astro";
+import { users } from "../../consts/avatars";
+---
+
+<!-- contenedor principal -->
+<main
+  class="mt-18 grid grid-cols-1 xl:grid-cols-2 w-full lg:pr-6 py-20 bg-[#fdfbfb] gap-6 2xl:gap-14"
+>
+  <!-- contenedor izquierdo con la información -->
+  <div
+    class="flex flex-col items-center xl:items-end justify-center"
+    id="text-anim"
+  >
+    <!-- contenedor para que no se bugee la información -->
+    <div class="flex items-center flex-col lg:items-start">
+      <!-- anuncio de lanzamiento -->
+      <a
+        href="https://khz-admin.netlify.app/"
+        target="_blank"
+        class="py-2 px-1 rounded-full border-gray-300 border bg-white w-fit font-medium flex items-center gap-1 cursor-pointer hover:bg-[#fdfdfd]"
+      >
+        <p class="text-sm">
+          <span class="bg-gray-50 p-1 rounded-full text-gray-600 mr-2"
+            >Acceso anticipado
+          </span>Prueba la demo
+        </p>
+        <i class="bx bx-right-arrow-alt text-2xl"></i>
+      </a>
+
+      <!-- título -->
+      <h1
+        class="text-5xl text-center lg:text-left font-semibold py-3 sm:py-4 lg:py-6 animate-item"
+      >
+        Potenciando tu <br class="hidden sm:block" /> negocio para el futuro.
+      </h1>
+
+      <!-- texto -->
+      <p
+        class="text-wrap text-lg text-gray-600 pb-6 sm:pb-7 lg:pb-9 animate-item"
+      >
+        Nuestra plataforma te ayuda a optimizar las operaciones, <br
+          class="hidden sm:block"
+        /> aumentar la productividad y escalar sin esfuerzo.
+      </p>
+
+      <!-- botón -->
+      <div class="animate-item">
+        <MainButton />
+      </div>
+
+      <!-- contenedor de los avatares -->
+      <!-- avatares -->
+      <div class="flex items-center mt-6 gap-5 animate-item">
+        <div class="relative h-10 w-32">
+          {
+            users.map((user) => (
+              <img
+                src={user.img}
+                alt="Usuario"
+                class="w-10 h-10 rounded-full object-cover absolute hover:-top-1 duration-150 border-2 border-white top-0"
+                style={`left: ${user.position}px`}
+              />
+            ))
+          }
+        </div>
+        <!-- texto -->
+        <p class="text-gray-500 text-sm">Más de 1000 bots satisfechos</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- contenedor derecho con la imagen -->
+  <div
+    class="rounded-xl overflow-hidden shadow-lg duration-150 animate-image hover:scale-[1.01]"
+  >
+    <img
+      src="/public/dashboard.webp"
+      alt="Dashboard de la aplicación"
+      class="w-full h-auto"
+    />
+  </div>
+</main>
+
+<style>
+  #text-anim {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.5s ease-in-out;
+  }
+
+  #text-anim.text-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-image {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  .animate-image.image-visible {
+    animation: img-scale 0.7s ease-in-out forwards;
+  }
+
+  @keyframes img-scale {
+    0% {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+    75% {
+      transform: scaleY(1.2);
+    }
+    100% {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+</style>
+
+<script>
+  import { createObserverAnim } from "../../js/observerAnimation";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const textAnim = document.getElementById("text-anim");
+    const imageAnim = document.querySelector(".animate-image");
+
+    if (textAnim) {
+      const animationText = createObserverAnim("text-visible");
+      animationText.observe(textAnim);
+    }
+
+    if (imageAnim) {
+      const animationImage = createObserverAnim("image-visible");
+      animationImage.observe(imageAnim);
+    }
+  });
+</script>

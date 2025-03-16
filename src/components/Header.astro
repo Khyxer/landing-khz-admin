@@ -1,0 +1,79 @@
+---
+import MainButton from "../components/MainButton.astro";
+
+const menuItems = [
+  { href: "#producto", text: "Producto" },
+  { href: "#metricas", text: "Métricas" },
+  { href: "#precios", text: "Precios" },
+  { href: "#preguntas", text: "Preguntas" },
+];
+---
+
+<script>
+  const menuButton = document.querySelector("#menuButton");
+  const mobileMenu = document.querySelector("#mobileMenu");
+
+  menuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("translate-x-full");
+    menuButton.querySelector("i")?.classList.toggle("bx-x");
+  });
+</script>
+
+<main
+  class="fixed top-0 left-0 w-full flex justify-center items-center p-3 bg-[#ffffff9d] backdrop-blur-md z-20 shadow-sm"
+>
+  <div class="2xl:w-[65%] w-[97%] flex justify-between items-center">
+    <div class="flex items-center gap-11 select-none">
+      <div class="flex items-center text-xl font-bold">
+        <img
+          src="/public/logo_black.webp"
+          draggable="false"
+          width="45"
+          alt="logo"
+        />
+        <h2>KhzAdmin</h2>
+      </div>
+
+      <nav class="hidden lg:flex items-center text-gray-700">
+        <ul class="flex gap-11">
+          {
+            menuItems.map(({ href, text }) => (
+              <li class="hover:text-gray-500 px-1">
+                <a href={href}>{text}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+    <div class="flex items-center gap-5">
+      <div class="sm:block hidden">
+        <MainButton />
+      </div>
+      <button id="menuButton" class="lg:hidden" aria-label="Open mobile menu">
+        <i class="bx bx-menu text-gray-700 text-5xl"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobileMenu"
+    class="fixed top-[73px] right-0 w-full h-screen bg-white transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
+  >
+    <nav class="p-5">
+      <ul class="flex flex-col gap-5">
+        {
+          menuItems.map(({ href, text }) => (
+            <li class="text-gray-700 hover:text-gray-500 text-lg">
+              <a href={href}>{text}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-5">
+        <MainButton />
+      </div>
+    </nav>
+  </div>
+</main>

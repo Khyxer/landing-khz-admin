@@ -1,0 +1,68 @@
+---
+import { metricas } from "../../consts/metricas";
+---
+
+<section class="pt-36" id="metricas">
+  <div class="text-center text-animate">
+    <h1 class="text-4xl font-medium mb-4">Análisis de métricas</h1>
+    <p class="text-gray-500 text-lg mb-18">
+      Mira una comprensión más profunda y toma decisiones <br /> estratégicas con
+      análisis de datos.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-15 data-anim">
+    {
+      metricas.map((metrica) => (
+        <div class="text-center flex flex-col items-center gap-2">
+          <span class="text-3xl font-semibold">{metrica.valor}</span>
+          <h3 class="text-2xl font-medium">{metrica.titulo}</h3>
+          <p class="text-gray-500 text-sm">{metrica.desc}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .text-animate {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .text-animate.text-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .data-anim {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .data-anim.data-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  import { createObserverAnim } from "../../js/observerAnimation";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const textAnim = document.querySelector(".text-animate");
+    const dataAnim = document.querySelector(".data-anim");
+
+    if (textAnim) {
+      const animationText = createObserverAnim("text-visible");
+      animationText.observe(textAnim);
+    }
+
+    if (dataAnim) {
+      const animationData = createObserverAnim("data-visible");
+      animationData.observe(dataAnim);
+    }
+  });
+</script>

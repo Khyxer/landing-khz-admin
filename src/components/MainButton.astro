@@ -1,0 +1,35 @@
+<a
+  href="https://khz-admin.netlify.app/"
+  target="_blank"
+  class="bg-primary rounded-full text-white px-4 py-2 cursor-pointer hover:bg-gray-800 duration-150 gap-1 flex items-center w-fit button"
+>
+  <p>Ver Demo</p>
+  <div class="flex text-2xl h-5 w-5 arrows items-center justify-center">
+    <i class="bx bx-up-arrow-alt travel"></i>
+    <i class="bx bx-up-arrow-alt now"></i>
+  </div>
+</a>
+
+<style>
+  .button {
+    overflow: hidden;
+    .arrows {
+      position: relative;
+    }
+    &:hover .travel {
+      transform: translate(20px, -25px) rotate(45deg);
+    }
+    &:hover .now {
+      transform: translate(0px, 0px) rotate(45deg);
+    }
+    .now {
+      transform: translate(-40px, 40px) rotate(45deg);
+    }
+
+    i {
+      transform: rotate(45deg);
+      transition: 0.1s ease-in-out;
+      position: absolute;
+    }
+  }
+</style>

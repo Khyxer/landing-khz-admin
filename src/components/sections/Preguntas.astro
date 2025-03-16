@@ -1,0 +1,99 @@
+---
+const preguntas = [
+  {
+    pregunta: "¿Qué incluye el sistema?",
+    respuesta:
+      "Nuestro sistema incluye software de gestión de ventas, control de inventario, administración de empleados, análisis de datos y reportes personalizados, además de soporte técnico continuo.",
+  },
+  {
+    pregunta: "¿Cómo funciona la implementación del sistema?",
+    respuesta:
+      "El proceso es simple: programamos una demostración inicial, evaluamos las necesidades específicas de tu negocio, configuramos el sistema según tus requerimientos y, una vez listo, ofrecemos capacitación completa a tu personal para comenzar a operar inmediatamente.",
+  },
+  {
+    pregunta: "¿Cuál es el costo del sistema POS?",
+    respuesta:
+      "Ofrecemos diferentes planes según el tamaño de tu negocio y las funcionalidades requeridas. Contamos con opciones de pago único o suscripción mensual. Contáctanos para recibir una cotización personalizada.",
+  },
+  {
+    pregunta: "¿Es compatible con mi hardware existente?",
+    respuesta:
+      "Nuestro sistema es compatible con la mayoría de los dispositivos modernos, incluyendo terminales de pago, impresoras de recibos, lectores de códigos y cajones de efectivo. Podemos evaluar tu equipo actual o recomendarte las opciones más adecuadas para tu negocio.",
+  },
+];
+---
+
+<section class="preguntas-section" id="preguntas">
+  <div class="container mx-auto px-4 py-16">
+    <h2 class="text-4xl font-bold text-center mb-12">Preguntas Frecuentes</h2>
+    <div class="max-w-3xl mx-auto">
+      {
+        preguntas.map((item, index) => (
+          <div class="accordion-item mb-4 border-b border-gray-400">
+            <button
+              class="accordion-header cursor-pointer w-full text-left p-4 bg-white  hover:bg-gray-50 transition-all duration-300 flex justify-between items-center"
+              data-index={index}
+            >
+              <span class="font-semibold text-lg">{item.pregunta}</span>
+              <svg
+                class="w-6 h-6 transform transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 bg-white rounded-b-lg">
+              <p class="p-4 text-gray-600">{item.respuesta}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .accordion-item.active .accordion-header svg {
+    transform: rotate(180deg);
+  }
+
+  .accordion-item.active .accordion-content {
+    max-height: 200px;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const accordionHeaders = document.querySelectorAll(".accordion-header");
+
+    accordionHeaders.forEach((header) => {
+      header.addEventListener("click", () => {
+        const item = header.parentElement;
+        if (!item) return;
+
+        const isActive = item.classList.contains("active");
+
+        // Cerrar todos los acordeones
+        document
+          .querySelectorAll(".accordion-item")
+          .forEach((accordionItem) => {
+            if (accordionItem) {
+              accordionItem.classList.remove("active");
+            }
+          });
+
+        // Abrir el acordeón seleccionado si no estaba activo
+        if (!isActive) {
+          item.classList.add("active");
+        }
+      });
+    });
+  });
+</script>

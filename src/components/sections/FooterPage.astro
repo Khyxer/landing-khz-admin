@@ -1,0 +1,49 @@
+---
+import { footerData } from "../../consts/footerData";
+---
+
+<div class="bg-[#111111] flex flex-col w-full rounded-3xl my-7 p-7">
+  <div class="flex-1 flex items-start justify-between flex-col lg:flex-row mb-5">
+    <div class="flex items-center">
+      <img src="/public/logo_white.webp" width="65" alt="logo footer" />
+      <p class="text-white text-2xl font-bold">KhzAdmin</p>
+    </div>
+    <div class="flex gap-5 lg:gap-20 flex-col lg:flex-row">
+      {
+        footerData.map((item) => (
+          <div class="flex flex-col gap-2">
+            <p class="text-white text-lg font-medium">{item.titulo}</p>
+            {item.links.map((link) => (
+              <a
+                href={link.url}
+                class="text-gray-400 hover:text-gray-200 text-sm"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.title}
+              </a>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="flex justify-between">
+    <p class="text-gray-300">
+      KhzCompany. Todos los derechos reservados. © {new Date().getFullYear()}
+    </p>
+    <div class="flex items-center gap-4 justify-center">
+      {
+        [
+          <i class="bx bxl-facebook-circle" />,
+          <i class="bx bxl-instagram" />,
+          <i class="bx bxl-linkedin" />,
+        ].map((icon) => (
+          <a href="#" class="text-gray-400 hover:text-gray-200 text-2xl">
+            {icon}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</div>

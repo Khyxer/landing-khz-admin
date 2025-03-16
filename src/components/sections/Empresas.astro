@@ -1,0 +1,131 @@
+---
+import "@splidejs/splide/css"; //libreria para el carrusel
+const empresas = ["Maincrosoft", "Pear", "Amazonas", "Sñotify", "Wackdonalds"]; //array con el nombre de las empresas
+---
+
+<div class="mt-20 flex lg:flex-row flex-col gap-8">
+  <h2
+    class="text-gray-500 text-nowrap text-anim text-xl text-center lg:text-left lg:text-base"
+  >
+    Con la confianza de empresas <br /> 100% reales, líderes en el mundo
+  </h2>
+
+  <!-- carrusel -->
+  <div class="w-full overflow-hidden">
+    <div class="main-carousel logo-anim">
+      <!-- separadores para que no sea mal cuando salen y entran las imagenes -->
+      <div class="separador left"></div>
+      <div class="separador right"></div>
+      <!-- carrusel en si -->
+      <section class="splide" aria-label="Basic Structure Example">
+        <div class="splide__track">
+          <ul class="splide__list">
+            {
+              empresas.map((empresa) => (
+                <li class="splide__slide">
+                  <div class="flex items-center gap-2">
+                    <div class="h-12 w-18">
+                      {/*  la imagen del logo de la empresa tienen el mismo nombre que en el array pero en minusculas  */}
+                      <img
+                        src={`/public/empresas/${empresa.toLowerCase()}.webp`}
+                        alt={empresa}
+                        class="object-contain w-full h-full"
+                      />
+                    </div>
+                    <p class="text-2xl font-medium">{empresa}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<style>
+  .text-anim {
+    opacity: 0;
+    transform: translateX(-200px);
+    transition: all 0.6s ease-in-out;
+  }
+
+  .logo-anim {
+    opacity: 0;
+    transform: translateX(200px);
+    transition: all 1s ease-in-out;
+  }
+
+  .visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .main-carousel {
+    position: relative;
+  }
+
+  .separador {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 20px;
+    z-index: 1;
+  }
+  .left {
+    left: 0;
+    background: linear-gradient(-90deg, transparent, white);
+  }
+  .right {
+    right: 0;
+    background: linear-gradient(90deg, transparent, white);
+  }
+</style>
+
+<script>
+  import Splide from "@splidejs/splide";
+  import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
+
+  //configuracion del carrusel
+  document.addEventListener("DOMContentLoaded", function () {
+    const splide = new Splide(".splide", {
+      type: "loop",
+      drag: "free",
+      focus: "center",
+      pagination: false,
+      arrows: false,
+      perPage: 3,
+      breakpoints: {
+        768: {
+          perPage: 2,
+        },
+        520: {
+          perPage: 1,
+        },
+      },
+      autoScroll: {
+        pauseOnHover: false,
+        speed: 1.5,
+      },
+    });
+
+    splide.mount({ AutoScroll });
+  });
+
+  //animaciones
+  import { createObserverAnim } from "../../js/observerAnimation";
+
+  const textAnim = document.querySelector(".text-anim");
+  const logoAnim = document.querySelector(".logo-anim");
+
+  if (textAnim) {
+    const animationText = createObserverAnim("visible");
+    animationText.observe(textAnim);
+  }
+
+  if (logoAnim) {
+    const animationLogo = createObserverAnim("visible");
+    animationLogo.observe(logoAnim);
+  }
+</script>
