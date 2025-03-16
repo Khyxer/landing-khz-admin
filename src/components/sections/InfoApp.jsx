@@ -73,7 +73,7 @@ export const InfoApp = () => {
       {/* las imagenes se llaman igual a excepción del id que se cambia con la función de arriba */}
       <div className="mt-12 overflow-hidden rounded-xl shadow-lg">
         <img
-          src={`/public/vistas/vista_${selectedSection}.webp`}
+          src={`/vistas/vista_${selectedSection}.webp`}
           alt={`Vista ${selectedSection}`}
           className="w-full h-full object-cover"
         />
